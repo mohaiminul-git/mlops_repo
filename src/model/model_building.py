@@ -17,7 +17,7 @@ import os
 #     repo_name="mlops_repo",
 #     mlflow=True
 # )
-dagsub_token = os.getenv("DAGSUB_TOKEN") or os.getenv("dagsub_token")
+dagsub_token = os.getenv("DAGSUB_TOKEN") 
 os.environ["MLFLOW_TRACKING_USERNAME"] = dagsub_token
 os.environ["MLFLOW_TRACKING_PASSWORD"] = dagsub_token
 
