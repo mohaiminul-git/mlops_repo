@@ -12,12 +12,20 @@ import os
 
 
 
-dagshub.init(
-    repo_owner="mohaiminul-git",
-    repo_name="mlops_repo",
-    mlflow=True
-)
+# dagshub.init(
+#     repo_owner="mohaiminul-git",
+#     repo_name="mlops_repo",
+#     mlflow=True
+# )
+dagsub_token = os.getenv("DAGSUB_TOKEN") or os.getenv("dagsub_token")
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagsub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagsub_token
 
+dagshub_url = "https://dagshub.com"
+repo_owner = "mohaiminul-git"
+repo_name = "mlops_repo"
+# Set up MLflow tracking URI
+mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 
 def load_data(file_path: str) -> pd.DataFrame:
     """Load data from a CSV file."""

@@ -102,6 +102,7 @@
         
         
 import json
+import os
 import mlflow
 from mlflow import MlflowClient
 import logging
@@ -112,11 +113,21 @@ import warnings
 warnings.simplefilter("ignore", UserWarning)
 warnings.filterwarnings("ignore")
 
-dagshub.init(
-    repo_owner="mohaiminul-git",
-    repo_name="mlops_repo",
-    mlflow=True
-)
+# dagshub.init(
+#     repo_owner="mohaiminul-git",
+#     repo_name="mlops_repo",
+#     mlflow=True
+# )
+
+
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagsub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagsub_token
+
+dagshub_url = "https://dagshub.com"
+repo_owner = "mohaiminul-git"
+repo_name = "mlops_repo"
+# Set up MLflow tracking URI
+mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 
 def main():
     try:
