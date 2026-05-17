@@ -18,8 +18,8 @@ import os
 #     mlflow=True
 # )
 # dagsub_token = os.getenv("DAGSUB_TOKEN") 
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagsub_token
-os.environ["MLFLOW_TRACKING_PASSWORD"] = dagsub_token
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("dagsub_token")
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("dagsub_token")
 
 dagshub_url = "https://dagshub.com"
 repo_owner = "mohaiminul-git"

@@ -80,8 +80,8 @@ def normalize_text(text):
 # if not dagshub_token:
 #     raise EnvironmentError("CAPSTONE_TEST environment variable is not set")
 
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("dagsub_token")
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("dagsub_token")
 
 dagshub_url = "https://dagshub.com"
 repo_owner = "mohaiminul-git"
