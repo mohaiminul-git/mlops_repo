@@ -86,8 +86,8 @@ def main():
             # Force log_model to execute cleanly. If this fails, the script will crash here and show why.
             mlflow.sklearn.log_model(
                 sk_model=clf,
-                artifact_path="model",
-                registered_model_name="my_model"
+                artifact_path="model"
+                #registered_model_name="my_model"
             )
                         
             save_model(clf, 'models/model.pkl')
