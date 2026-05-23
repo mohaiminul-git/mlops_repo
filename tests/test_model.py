@@ -17,20 +17,15 @@ class TestModelLoading(unittest.TestCase):
         # if not dagshub_token:
         #     raise EnvironmentError("dagsub_token environment variable is not set")
 
-        os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("dagsub_token")
-        os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("dagsub_token")
+        os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("DAGSUB_TOKEN")
+        os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("DAGSUB_TOKEN")
 
         dagshub_url = "https://dagshub.com"
         repo_owner = "mohaiminul-git"
         repo_name = "mlops_repo"
         # Set up MLflow tracking URI
         mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
-        
-        # dagshub.init(
-        # repo_owner="mohaiminul-git",
-        # repo_name="mlops_repo",
-        # mlflow=True
-        # )
+       
 
         # Load the new model from MLflow model registry
         cls.new_model_name = "my_model"
