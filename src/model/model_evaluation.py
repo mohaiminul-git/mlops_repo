@@ -1,4 +1,5 @@
 import numpy as np
+np.seterr(divide='ignore', over='ignore', invalid='ignore')
 import pandas as pd
 import pickle
 import json
@@ -14,8 +15,8 @@ from src.logger import logging
 # Below code block is for production use
 # -------------------------------------------------------------------------------------
 # Set up DagsHub credentials for MLflow tracking
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagsub_token
-os.environ["MLFLOW_TRACKING_PASSWORD"] = dagsub_token
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("DAGSUB_TOKEN")
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("DAGSUB_TOKEN")
 
 dagshub_url = "https://dagshub.com"
 repo_owner = "mohaiminul-git"
@@ -124,13 +125,15 @@ def save_metrics(metrics: dict, file_path: str) -> None:
 #         logging.error('Error occurred while saving the model info: %s', e)
 #         raise
 
-# model_info_path = 'reports/experiment_info.json'
-# model_info = load_model_info(model_info_path)
+model_info_path = 'reports/experiment_info.json'
+model_info = load_model_info(model_info_path)
+print("MODEL INFO:", model_info)
 def main():
-        mlflow.start_run()  # Start an MLflow run
+        mlflow.start_run(run_id=model_info["run_id"])  # Start an MLflow run
         try:
             clf = load_model('./models/model.pkl')
             test_data = load_data('./data/processed/test_bow.csv')
+            print(test_data.head() )
             
             X_test = test_data.iloc[:, :-1].values
             y_test = test_data.iloc[:, -1].values
@@ -157,6 +160,7 @@ def main():
             
             # Log the metrics file to MLflow
             mlflow.log_artifact('reports/metrics.json')
+            mlflow.end_run()
 
         except Exception as e:
             logging.error('Failed to complete the model evaluation process: %s', e)

@@ -119,9 +119,8 @@ warnings.filterwarnings("ignore")
 #     mlflow=True
 # )
 
-
-os.environ["MLFLOW_TRACKING_USERNAME"] = dagsub_token
-os.environ["MLFLOW_TRACKING_PASSWORD"] = dagsub_token
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("DAGSUB_TOKEN")
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("DAGSUB_TOKEN")
 
 dagshub_url = "https://dagshub.com"
 repo_owner = "mohaiminul-git"

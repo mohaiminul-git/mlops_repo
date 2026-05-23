@@ -18,8 +18,8 @@ import os
 #     mlflow=True
 # )
 # dagsub_token = os.getenv("DAGSUB_TOKEN") 
-os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("dagsub_token")
-os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("dagsub_token")
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("DAGSUB_TOKEN")
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("DAGSUB_TOKEN")
 
 dagshub_url = "https://dagshub.com"
 repo_owner = "mohaiminul-git"
@@ -72,7 +72,7 @@ def save_model_info(run_id: str, model_path: str, file_path: str) -> None:
         logging.error('Error occurred while saving the model info: %s', e)
         raise
 def main():
-    mlflow.set_experiment("my-dvc-pipeline")
+    mlflow.set_experiment("my-dvc-pipeline_1")
     
     # Keep the try-except completely outside the run context to catch tracking initialization issues too
     try:
