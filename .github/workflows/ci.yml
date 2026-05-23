@@ -29,24 +29,24 @@ jobs:
 
       - name: run pipeline
         env:
-          dagsub_token: ${{ secrets.DAGSUB_TOKEN}} 
+          DAGSUB_TOKEN: ${{ secrets.DAGSUB_TOKEN}} 
         run: |
           dvc repro
 
       - name: Run model tests
         env:
-          dagsub_token: ${{ secrets.DAGSUB_TOKEN }}
+          DAGSUB_TOKEN: ${{ secrets.DAGSUB_TOKEN }}
         run: |
           python -m unittest tests/test_model.py
 
       - name: Promote model to production
         if: success()
         env:
-          dagsub_token: ${{ secrets.DAGSUB_TOKEN }}
+          DAGSUB_TOKEN: ${{ secrets.DAGSUB_TOKEN }}
         run: python scripts/promote_model.py
 
       - name: Run Flask app tests
         if: success()
         env:
-          dagsub_token: ${{ secrets.DAGSUB_TOKEN }}
+          DAGSUB_TOKEN: ${{ secrets.DAGSUB_TOKEN }}
         run: python -m unittest tests/test_flask_app.py
